@@ -2,7 +2,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 
 # read csv
-vgs = pd.read_csv("vgs.csv")
+vgs = pd.read_csv("../data/vgs.csv")
 vgs = vgs.iloc[::-1] #csv is in reverse chronological order; this line inverts it
 vgs['Date'] = pd.to_datetime(vgs['Date'], format='%d/%m/%Y') #convert dates from str to datetime object
 #print(vgs)
@@ -11,14 +11,14 @@ vgs['Date'] = pd.to_datetime(vgs['Date'], format='%d/%m/%Y') #convert dates from
 def plot_line(x, y, xlabel="x", ylabel="y", name=""):
     fig = plt.plot(x, y)
     prettify(fig, xlabel, ylabel, rotate=True)
-    plt.show()
     if name: save(fig, name)
+    plt.show()
 
 def plot_hist(values, range=(0,10), nbins=10, xlabel="Values", ylabel="Frequency", name=""):
     fig = plt.hist(values, nbins)
     prettify(fig, xlabel, ylabel)
-    plt.show()
     if name: save(fig, name)
+    plt.show()
 
 def prettify(fig, xlabel="x", ylabel="y", rotate=False):
     plt.xlabel(xlabel)
@@ -27,28 +27,28 @@ def prettify(fig, xlabel="x", ylabel="y", rotate=False):
     plt.tight_layout()
 
 def save(fig, name):
-    plt.savefig(f"{name}.pdf")    
+    plt.savefig(f"../outputs/{name}.pdf")    
     
 # PLOT
 date = vgs['Date'].to_numpy()
-close = vgs['Price'].to_numpy()
-fluctuation = vgs['High'].to_numpy() - vgs['Low'].to_numpy()
+open_price = vgs['Open'].to_numpy()
 
-plot_line(date, close, xlabel="Date", ylabel="Close price [$]", name="price")
-plot_line(date, fluctuation, xlabel="Date", ylabel="Daily price fluctuation [$]", name="day_range")
+close_price = vgs['Price'].to_numpy()
+max_fluctuation = vgs['High'].to_numpy() - vgs['Low'].to_numpy()
 
-# calculate and plot the number of consecutive days that the unit price increased
+plot_line(date, close_price, xlabel="Date", ylabel="Close price [$]", name="price")
+plot_line(date, max_fluctuation, xlabel="Date", ylabel="Daily price fluctuation [$]", name="day_range")
+
+# Number of consecutive days that the unit price increased
 numberConsecutiveIncreasing = []
 count = 0
-for i in range(1,len(close)):
-    if close[i] > close[i-1]:
+for i in range(1,len(close_price)):
+    if close_price[i] > close_price[i-1]:
         count += 1
     else:
         numberConsecutiveIncreasing.append(count)
         count = 0
 
-print(numberConsecutiveIncreasing)
-print(close)
 xmin = min(numberConsecutiveIncreasing)
 xmax = max(numberConsecutiveIncreasing)
 nbins = xmax - xmin
