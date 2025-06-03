@@ -19,6 +19,6 @@ def prettify(xlabel="", ylabel="", rotate=False):
     plt.tight_layout()
 
 def save(name, show=False):
-    plt.savefig(f"../outputs/{name}.png")
+    plt.savefig(f"outputs/{name}.png")
     if show: plt.show()
     else: plt.close()
