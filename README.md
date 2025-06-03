@@ -32,3 +32,8 @@
     </td>
   </tr>
 </table>
+
+#### Features:
+- [x] Notebook for visualising distributions
+- [ ] Power BI report containing a summary of price movement and key distributions
+- [ ] ML regression on past data to predict future trends
