@@ -21,6 +21,12 @@ def plot_hist(values, axisrange=None, nbins=50, density=False, color="royalblue"
     plt.hist(values, range=axisrange, bins=nbins, density=density, color=color, alpha=alpha, label=legend)
     prettify(xlabel, ylabel)
 
+def plot_hist2d(values, axisrange=[[1,10],[1,10]], nbins=9, density=False, xlabel="Consecutive increasing days", ylabel="Consecutive decreasing days after increase", zlabel=""):
+    plt.hist2d(values[:,0], values[:,1], range=axisrange, bins=nbins, density=density)
+    cbar = plt.colorbar()
+    if zlabel: cbar.set_label(zlabel)
+    prettify(xlabel, ylabel)
+
 def prettify(xlabel="", ylabel="", rotate=False):
     if xlabel: plt.xlabel(xlabel)
     if ylabel: plt.ylabel(ylabel)
