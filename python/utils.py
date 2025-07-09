@@ -1,10 +1,7 @@
-import pandas as pd
 import matplotlib.pyplot as plt
 import matplotlib.dates as mpl_dates
-import mplfinance as mpf
-from mpl_finance import candlestick_ohlc
+from mplfinance.original_flavor import candlestick_ohlc
 
-# using old mpl_finance API
 def plot_candle(ohlc, width=0.6, colorup='green', colordown='red', alpha=0.8, xlabel="Date", ylabel="Price [$]"):
     fig, ax = plt.subplots()
     candlestick_ohlc(ax, ohlc.values, width=width, colorup=colorup, colordown=colordown, alpha=alpha)
