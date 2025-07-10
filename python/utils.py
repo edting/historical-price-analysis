@@ -21,19 +21,18 @@ def plot_hist(values, xlabel="Values", ylabel="Frequency", axisrange=None, nbins
     plt.hist(values, range=axisrange, bins=nbins, density=density, color=color, alpha=alpha, label=legend, **kwargs)
     prettify(xlabel, ylabel)
 
-def plot_hist2d(values, xlabel="Consecutive increasing days", ylabel="Consecutive decreasing days after increase", zlabel="Frequency", text=False, axisrange=[[1,10],[1,10]], nbins=9, density=False, **kwargs):
-    hist, xbins, ybins, image = plt.hist2d(values[:,0], values[:,1], range=axisrange, bins=nbins, density=density, **kwargs)
+def plot_hist2d(values, xlabel="", ylabel="", zlabel="", text=False, **kwargs):
+    hist, xbins, ybins, image = plt.hist2d(values[:,0], values[:,1], **kwargs)
     cbar = plt.colorbar()
     prettify(xlabel, ylabel)
     if zlabel: cbar.set_label(zlabel)
-    if text:
-        # show nonzero bin contents on the plot
+    if text: # show nonzero bin contents on the plot
         ax = plt.gca()
         for i in range(len(ybins)-1):
             for j in range(len(xbins)-1):
                 bin_content = int(hist.T[i,j])
                 if bin_content == 0: continue
-                ax.text(xbins[j]+0.5,ybins[i]+0.5, bin_content, color="w", ha="center", va="center", fontweight="bold")
+                ax.text(xbins[j]+0.5*(xbins[j+1]-xbins[j]),ybins[i]+0.5*(ybins[j+1]-ybins[j]), bin_content, color="w", ha="center", va="center", fontweight="bold")
 
 def prettify(xlabel="", ylabel="", rotate=False):
     if xlabel: plt.xlabel(xlabel)
