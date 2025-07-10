@@ -33,7 +33,7 @@ def countConsecutiveMovement(price):
     return numberConsecutiveIncreasing, numberConsecutiveDecreasing
 
 # For each period of consecutive increases, count the number of consecutive decreases that follow
-def flipStrength(price):
+def flipMomentum(price):
     flip = []
     num_incr = num_decr = 0
     skip = True
