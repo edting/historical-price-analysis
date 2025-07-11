@@ -1,37 +1,25 @@
 import numpy as np
 
-# Number of consecutive days that the unit price increased or decreased
+# Counts the number of consecutive days that the unit price increased or decreased
+# Returns two lists `num_consec_incr, num_consec_decr` containing the counts for each case
 def countConsecutiveMovement(price):
     num_consec_incr = []
     num_consec_decr = []
-    is_increasing = True #will flip to False when counting consecutive decreasing days
-    count = 0
+    num_incr = num_decr = 0
+    price = pruneLeadingBears(price)
     for i in range(1,len(price)):
-        # if counting consecutive decreases and find an increase in price (or vice versa),
-        # append the count to the appropriate list, reset it, and start counting for the new case
-        if price[i] > price[i-1]:
-            if count > 0 and not is_increasing:
-                num_consec_decr.append(count)
-                count = 0
-            is_increasing = True
-            count += 1
-        elif price[i] < price[i-1]:
-            if count > 0 and is_increasing:
-                num_consec_incr.append(count)
-                count = 0
-            is_increasing = False
-            count += 1
-        elif price[i] == price[i-1] and count > 0:
-            # in case two consecutive days close at the same value, treat as either
-            # increasing or decreasing depending on the trend that is currently being tracked
-            # i.e assuming that count > 0, simply increment the count :)
-            count += 1
+        if price[i] > price[i-1] and num_decr > 0:
+            num_consec_incr.append(num_incr)
+            num_consec_decr.append(num_decr)
+            num_incr = num_decr = 0
 
-        # on final iteration of the loop: append count to the appropriate list
-        if i == len(price)-1 and count > 0:
-            if is_increasing: num_consec_incr.append(count)
-            else: num_consec_decr.append(count)
+        # increment counters
+        num_incr, num_decr = incrementCounts(num_incr, num_decr, price[i], price[i-1])
 
+        # on final iteration: append the counts to their corresponding list
+        if i == len(price)-1:
+            if num_incr > 0: num_consec_incr.append(num_incr)
+            if num_decr > 0: num_consec_decr.append(num_decr)
     return num_consec_incr, num_consec_decr
 
 # Number of consecutive decreases that follow each increasing period ("momentum" of the flip)
