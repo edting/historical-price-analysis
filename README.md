@@ -14,7 +14,7 @@
     <th> Description </th>
   </tr>
   <tr>
-    <td> <a href="https://github.com/edting/historical-price-analysis/blob/master/analysis.ipynb">analysis.ipynb</a> </td>
+    <td> <a href="analysis.ipynb">analysis.ipynb</a> </td>
     <td> Main notebook for producing plots </td>
   </tr>
   <tr>
@@ -26,14 +26,14 @@
     <td>
       Directory containing python helper files:
       <ul>
-        <li><a href="https://github.com/edting/historical-price-analysis/blob/master/python/functions.py">functions.py</a>: algorithms for less-trivial behaviour </li>
-        <li><a href="https://github.com/edting/historical-price-analysis/blob/master/python/utils.py">utils.py</a>: plotting helper functions</li>
+        <li><a href="python/functions.py">functions.py</a>: algorithms for technical analysis </li>
+        <li><a href="python/utils.py">utils.py</a>: plotting helper functions</li>
       </ul>
     </td>
   </tr>
 </table>
 
 #### Features:
-- [x] Notebook for visualising distributions
-- [ ] Power BI report containing a summary of price movement and key distributions
-- [ ] ML regression on past data to predict future trends
+- [x] Jupyter notebook
+- [ ] Power BI report
+- [ ] ML regression
