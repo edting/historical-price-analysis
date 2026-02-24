@@ -2,7 +2,10 @@ import numpy as np
 
 def consecutive_movement(price):
     """
-    Splits price data into consecutively increasing or decreasing segments.
+    Study the lengths and strengths of consecutive movements in market price.
+
+    Implementation:
+    Split price data into consecutively increasing or decreasing segments.
     For each of these segments, determine the number of periods in the segment,
     and also fit a straight line and extract the slope of the segment.
 
@@ -17,7 +20,7 @@ def consecutive_movement(price):
     slope_decr = []
 
     num_incr = num_decr = 0
-    price = pruneLeadingBears(price)
+    price = prune_leading_bears(price)
     for i in range(1,len(price)):
         if price[i] > price[i-1] and num_decr > 0:
             num_consec_incr.append(num_incr)
@@ -25,14 +28,14 @@ def consecutive_movement(price):
 
             increasing_period = list(range(num_incr+1))
             increasing_segment = price[i-1-num_decr-num_incr:i-num_decr]
-            increasing_slope = np.polyfit(increasing_segment, increasing_price, 1)[0]
+            increasing_slope = np.polyfit(increasing_period, increasing_segment, 1)[0]
             slope_incr.append(increasing_slope)
-            
+
             decreasing_period = list(range(num_decr+1))
             decreasing_segment = price[i-1-num_decr:i]
-            decreasing_slope = np.polyfit(decreasing_segment, decreasing_price, 1)[0]
+            decreasing_slope = np.polyfit(decreasing_period, decreasing_segment, 1)[0]
             slope_decr.append(decreasing_slope)
-            
+
             num_incr = num_decr = 0
 
         num_incr, num_decr = increment_counts(num_incr, num_decr, price[i], price[i-1])
@@ -43,7 +46,7 @@ def consecutive_movement(price):
             if num_decr > 0: num_consec_decr.append(num_decr)
 
     return num_consec_incr, num_consec_decr, slope_incr, slope_decr
-    
+
 def prune_leading_bears(price):
     """
     Trims the start of price data so that it begins with a period of increasing price.

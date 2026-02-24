@@ -40,6 +40,8 @@ def plot_hist( values,
                legend = "",
                **kwargs ):
     plt.hist(values, range=axisrange, bins=nbins, density=density, color=color, alpha=alpha, label=legend, **kwargs)
+    if legend:
+        plt.legend()
     prettify(xlabel, ylabel)
 
 def plot_hist2d( x,
