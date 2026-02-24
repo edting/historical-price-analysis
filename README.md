@@ -2,6 +2,7 @@
 
 ```
 ├── analysis.ipynb
+├── regression.ipynb
 ├── data/
 └── python/
     ├── functions.py 
@@ -16,6 +17,10 @@
   <tr>
     <td> <a href="analysis.ipynb">analysis.ipynb</a> </td>
     <td> Main notebook for producing plots </td>
+  </tr>
+  <tr>
+    <td> <a href="regression.ipynb">regression.ipynb</a> </td>
+    <td> Time-series regression with a recurrent neural network </td>
   </tr>
   <tr>
     <td> data/ </td>
@@ -35,5 +40,5 @@
 
 #### Features:
 - [x] Jupyter notebook
+- [x] ML regression
 - [ ] Power BI report
-- [ ] ML regression
