@@ -1,15 +1,41 @@
+import matplotlib as mpl
 import matplotlib.pyplot as plt
 import matplotlib.dates as mpl_dates
+import mplfinance as mpf
 from mplfinance.original_flavor import candlestick_ohlc
+
+def set_plot_style(style='fast'):
+    """
+    The full list of possible customisations can be found here:
+    https://matplotlib.org/stable/users/explain/customizing.html#the-default-matplotlibrc-file
+    """
+    mpl.style.use(style)
+    mpl.rcParams['grid.linestyle'] = '--'
+    mpl.rcParams['figure.figsize'] = (8,6)
+    mpl.rcParams['figure.dpi'] = 90
+    mpl.rcParams['axes.edgecolor'] = 'black'
+    mpl.rcParams['axes.labelsize'] = 14
+    mpl.rcParams['font.size'] = 11
 
 def plot_candle( ohlc,
                  xlabel = "Date",
                  ylabel = "Price [$]",
-                 width = 0.6,
-                 colorup = 'green',
-                 colordown = 'red',
-                 alpha = 0.8,
                  **kwargs ):
+    fig, ax = mpf.plot(ohlc, type='candle', xlabel=xlabel, ylabel=ylabel, figratio=(8,6), returnfig=True, **kwargs)
+    ax[0].yaxis.set_label_position('left')
+    ax[0].yaxis.tick_left()
+    for i in ['top', 'bottom', 'left', 'right']:
+        ax[0].spines[i].set_color('black')
+    prettify(rotate=True)
+
+def plot_candle_original( ohlc,
+                          xlabel = "Date",
+                          ylabel = "Price [$]",
+                          width = 0.6,
+                          colorup = 'green',
+                          colordown = 'red',
+                          alpha = 0.8,
+                          **kwargs ):
     fig, ax = plt.subplots()
     candlestick_ohlc(ax, ohlc.values, width=width, colorup=colorup, colordown=colordown, alpha=alpha, **kwargs)
     date_format = mpl_dates.DateFormatter('%d-%m-%Y')
@@ -23,10 +49,10 @@ def plot_line( x,
                ylabel = "y",
                horizontal = [],
                **kwargs ):
+    plt.plot(x, y, **kwargs)
     if horizontal:
         for value in horizontal:
-            plt.axhline(y=value, color='lightgrey', linestyle='dashed')
-    plt.plot(x, y, **kwargs)
+            plt.axhline(y=value, color='lightgrey', linestyle='dashed', zorder=0)
     prettify(xlabel, ylabel, rotate=True)
 
 def plot_hist( values,
@@ -71,10 +97,9 @@ def prettify( xlabel = "",
     if xlabel: plt.xlabel(xlabel)
     if ylabel: plt.ylabel(ylabel)
     if rotate: plt.xticks(rotation=45, fontsize='small')
-    plt.tight_layout()
 
 def save( name,
           show = False ):
-    plt.savefig(f"outputs/{name}.png")
+    plt.savefig(f"outputs/{name}.png",bbox_inches='tight')
     if show: plt.show()
     else: plt.close()
