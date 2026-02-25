@@ -1,9 +1,8 @@
-## Stock price analysis
+## Historical price analysis
 
 ```
 ├── analysis.ipynb
 ├── regression.ipynb
-├── data/
 └── python/
     ├── functions.py 
     └── utils.py
@@ -16,15 +15,11 @@
   </tr>
   <tr>
     <td> <a href="analysis.ipynb">analysis.ipynb</a> </td>
-    <td> Main notebook for producing plots </td>
+    <td> Notebook for plotting trends and indicators </td>
   </tr>
   <tr>
     <td> <a href="regression.ipynb">regression.ipynb</a> </td>
-    <td> Time-series regression with a recurrent neural network </td>
-  </tr>
-  <tr>
-    <td> data/ </td>
-    <td> Directory containing historical data </td>
+    <td> Time-series regression using a recurrent neural network </td>
   </tr>
   <tr>
     <td> python/ </td>
@@ -32,7 +27,7 @@
       Directory containing python helper files:
       <ul>
         <li><a href="python/functions.py">functions.py</a>: algorithms for technical analysis </li>
-        <li><a href="python/utils.py">utils.py</a>: plotting helper functions</li>
+        <li><a href="python/utils.py">utils.py</a>: plotting style and helper functions</li>
       </ul>
     </td>
   </tr>
@@ -41,4 +36,4 @@
 #### Features:
 - [x] Jupyter notebook
 - [x] ML regression
-- [ ] Power BI report
+- [ ] Dashboard
