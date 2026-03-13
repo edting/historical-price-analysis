@@ -1,0 +1,3 @@
+[submodule "findash"]
+	path = findash
+	url = git@github.com:edting/findash.git
