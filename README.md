@@ -3,9 +3,9 @@
 ```
 ├── analysis.ipynb
 ├── regression.ipynb
-└── python/
-    ├── functions.py 
-    └── utils.py
+└── utils/
+    ├── indicators.py 
+    └── plot.py
 ```
 
 <table>
@@ -22,18 +22,19 @@
     <td> Time-series regression using a recurrent neural network </td>
   </tr>
   <tr>
-    <td> python/ </td>
+    <td> utils/ </td>
     <td>
       Directory containing python helper files:
       <ul>
-        <li><a href="python/functions.py">functions.py</a>: algorithms for technical analysis </li>
-        <li><a href="python/utils.py">utils.py</a>: plotting style and helper functions</li>
+        <li><a href="utils/indicators.py">indicators.py</a>: calculate technical analysis indicators </li>
+        <li><a href="utils/plot.py">plot.py</a>: plotting style and helper functions</li>
       </ul>
     </td>
   </tr>
 </table>
 
-#### Features:
-- [x] Jupyter notebook
+#### WIP features:
+- [x] Indicators in market data
 - [x] ML regression
-- [ ] Dashboard
+- [ ] Financial dashboard display
+- [ ] Back-testing infrastructure
