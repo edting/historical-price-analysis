@@ -36,5 +36,7 @@
 #### WIP features:
 - [x] Indicators in market data
 - [x] ML regression
-- [ ] Financial dashboard display
+- [x] Financial dashboard display
 - [ ] Back-testing infrastructure
+  - [x] Skeleton framework
+  - [ ] Algorithm implementations
